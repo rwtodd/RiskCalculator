@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="module">
+            import * as ui from './js/riskcalc_ui.js'
+
+            window.ui = ui
+            window.onload = function() {
+                ui.initInstruments();
+                ui.resetAll();
+            }
+        </script>
+        <title>Trade Risk</title>
+        <link href="riskcalc.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1>Risk Calculator</h1>
+        <p class="section"></p>
+        <div class="panel">
+            <h1>Basic Info</h1>
+            <table>
+            <tbody>
+                <tr><th colspan="2">Instrument</th></tr>
+                <tr><th>Presets</th><td>
+                    <select id='knownInst' onchange="if (this.selectedIndex != 0) { ui.fillOutInstrument(); ui.reCalc(); }">
+                        <option>--</option>
+                    </select>
+                </td></tr>
+                <tr><th>Tick Size</th><td><input id='tickSize' type="number" size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th>Tick Value ($)</th><td><input id='tickValue' type="number" size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th class="heading" colspan="2">Trade Parameters</th></tr>
+                <tr><th>Direction</th><td>
+                    <select id='tradeDir' onchange="ui.reCalc();">
+                        <option value="1">Long</option>  
+                        <option value="-1">Short</option>
+                    </select>  
+                </td></tr>
+                <tr><th>Acct Size ($)</th><td><input id='acctVal' type='number' size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th>Trade Risk ($)</th><td><input id='tradeRisk' type='number' size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th>Trade Risk (%)</th><td><span id="tradeRiskPct">NaN</span></td></tr>
+
+                <tr><th class="heading" colspan="2">Derived Data</th></tr>
+                <tr><th>Average Entry</th><td><span id='avgEntry'>NaN</span></td></tr>
+                <tr><th>Worst Exit</th><td><span id='worstExit'>NaN</span></td></tr>
+                <tr><th># Contracts</th><td><span id='numContracts'>0</span></td></tr>
+                <tr><th>Entry-Exit Risk</th><td><span id='entryExitRisk'>NaN (NaN%)</span>
+                     <button onclick="ui.acceptRisk();">Accept</button></td></tr>
+                <tr><th>Worst-Case R Value</th><td><span id='worstR'>NaN</span> R</td></tr>
+
+            </tbody>
+            </table>
+            <p><button onclick="ui.resetAll();">Reset</button></p>
+        </div>
+
+        <div class="panel">
+            <h1>Transactions</h1>
+            <table id='transTbl'>
+            <thead>
+                <tr><th>Type</th><th>Price</th><th># Contracts</th></tr>
+            <tbody>
+            </tbody>
+            </table>
+            <button onclick="ui.addTransaction(0);">Add Row</button>
+            <br><br>
+            <h1>B/E Adjust</h1>
+            <table>
+                <tr><td>To get B/E to:</td><td><input type="number" id="beTgt" size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><td>in # contracts:</td><td><input type="number" id="beConts" size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><td>enter at:</td><td><span id="beEnter">NaN</span> (or better).</td></tr>
+            </table>
+        </div>
+
+        
+        <div class="panel">
+            <h1>R Scale</h1>
+            <table id="scaleTbl">
+            <thead>
+                <tr><th>R</th><th>Price</th><th>Ticks</th><th>Exact Price</th></tr>
+            <tbody>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+            </table>
+        </div>
+        
+        <p class="section"></p>
+        <p>&copy;2017 Richard Todd</p>
+    </body> 
+</html>

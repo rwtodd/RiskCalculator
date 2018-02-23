@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "es2015",
+        "target": "es2017",
+        "strict": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+    	"outDir": "../js"
+    },
+    "files": [
+       "riskcalc_trade.ts",
+       "riskcalc_ui.ts"
+    ]
+}
