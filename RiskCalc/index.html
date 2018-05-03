@@ -5,38 +5,45 @@
             import * as ui from './js/riskcalc_ui.js'
 
             window.ui = ui
+            const inputs = document.getElementsByClassName('user-input')
+            for(const user_input of inputs) {
+                user_input.addEventListener('change', evt => { ui.reCalc() }, false) 
+            }
             window.onload = function() {
                 ui.initInstruments();
                 ui.resetAll();
             }
         </script>
         <title>Trade Risk</title>
-        <link href="riskcalc.css" rel="stylesheet" type="text/css">
+        <style>
+           @import url('riskcalc.css') all;
+        </style>
     </head>
     <body>
         <h1>Risk Calculator</h1>
+        <article id="content">
         <p class="section"></p>
         <div class="panel">
             <h1>Basic Info</h1>
-            <table>
+            <table class="user-input">
             <tbody>
                 <tr><th colspan="2">Instrument</th></tr>
                 <tr><th>Presets</th><td>
-                    <select id='knownInst' onchange="if (this.selectedIndex != 0) { ui.fillOutInstrument(); ui.reCalc(); }">
+                    <select id='knownInst' onchange="if (this.selectedIndex != 0) { ui.fillOutInstrument() }">
                         <option>--</option>
                     </select>
                 </td></tr>
-                <tr><th>Tick Size</th><td><input id='tickSize' type="number" size="10" onchange="ui.reCalc();"></td></tr>
-                <tr><th>Tick Value ($)</th><td><input id='tickValue' type="number" size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th>Tick Size</th><td><input id='tickSize' type="number" size="10"></td></tr>
+                <tr><th>Tick Value ($)</th><td><input id='tickValue' type="number" size="10"></td></tr>
                 <tr><th class="heading" colspan="2">Trade Parameters</th></tr>
                 <tr><th>Direction</th><td>
-                    <select id='tradeDir' onchange="ui.reCalc();">
+                    <select id='tradeDir'>
                         <option value="1">Long</option>  
                         <option value="-1">Short</option>
                     </select>  
                 </td></tr>
-                <tr><th>Acct Size ($)</th><td><input id='acctVal' type='number' size="10" onchange="ui.reCalc();"></td></tr>
-                <tr><th>Trade Risk ($)</th><td><input id='tradeRisk' type='number' size="10" onchange="ui.reCalc();"></td></tr>
+                <tr><th>Acct Size ($)</th><td><input id='acctVal' type='number' size="10"></td></tr>
+                <tr><th>Trade Risk ($)</th><td><input id='tradeRisk' type='number' size="10"></td></tr>
                 <tr><th>Trade Risk (%)</th><td><span id="tradeRiskPct">NaN</span></td></tr>
 
                 <tr><th class="heading" colspan="2">Derived Data</th></tr>
@@ -54,7 +61,7 @@
 
         <div class="panel">
             <h1>Transactions</h1>
-            <table id='transTbl'>
+            <table id='transTbl' class="user-input">
             <thead>
                 <tr><th>Type</th><th>Price</th><th># Contracts</th></tr>
             <tbody>
@@ -63,9 +70,9 @@
             <button onclick="ui.addTransaction(0);">Add Row</button>
             <br><br>
             <h1>B/E Adjust</h1>
-            <table>
-                <tr><td>To get B/E to:</td><td><input type="number" id="beTgt" size="10" onchange="ui.reCalc();"></td></tr>
-                <tr><td>in # contracts:</td><td><input type="number" id="beConts" size="10" onchange="ui.reCalc();"></td></tr>
+            <table class="user-input">
+                <tr><td>To get B/E to:</td><td><input type="number" id="beTgt" size="10"></td></tr>
+                <tr><td>in # contracts:</td><td><input type="number" id="beConts" size="10"></td></tr>
                 <tr><td>enter at:</td><td><span id="beEnter">NaN</span> (or better).</td></tr>
             </table>
         </div>
@@ -92,8 +99,7 @@
             </tbody>
             </table>
         </div>
-        
-        <p class="section"></p>
-        <p>&copy;2017 Richard Todd</p>
+        </article>
+        <footer><p>&copy;2017 Richard Todd</p></footer>
     </body> 
 </html>

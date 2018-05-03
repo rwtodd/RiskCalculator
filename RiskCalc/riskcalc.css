@@ -1,8 +1,12 @@
-body {    background: steelblue; font-size: 12pt; }
-h1 {    color: goldenrod; }
+body {    background: steelblue; font-size: 12pt; font-family: Helvetica,Arial,sans-serif;}
+body > h1 {    color: goldenrod;  text-align: center; text-shadow: 2px 2px black; font-size: 24pt; font-weight: normal; }
+article#content { display: flex;  flex-flow: row; flex-wrap: wrap; align-content: flex-start; align-items: flex-start; justify-content: center; }
 th.heading {    padding-top: 1.5em; }
-div.panel {    float: left;    background: #ccc;    padding: 1em;    margin: 1em;  }
-div.panel > h1 {    margin-top: 0;    color: black;    font-size: 120%;  }
+th { font-weight: normal; }
+th[colspan="2"] { text-align: left; border-bottom: 1px solid black;  }
+div.panel {    background: #ccc;    padding: 1em;    margin: 1em;  }
+div.panel > h1 {    margin-top: 0;    color: black;  text-align: center; font-size: 16pt; font-weight: normal; text-shadow: 2px 2px darkgoldenrod;  }
+table.user-input input[type="number"] { width: 7em; }
 p.section {    clear: both; }
 #scaleTbl td {  padding: 0.5em 1em 0.5em 1em;    text-align: center;  }
 .rval--1 { background-color: rgb(221, 126, 107); }
@@ -12,3 +16,4 @@ p.section {    clear: both; }
 .rval-5, .rval-6 { background-color: rgb(147,196,125); }
 .rval-7, .rval-8 { background-color: rgb(106,168,79); }
 .rval-9, .rval-10 { background-color: rgb(68,145,35); }
+footer { text-align: center; }

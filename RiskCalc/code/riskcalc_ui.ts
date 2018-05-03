@@ -22,18 +22,20 @@ export function fillOutInstrument() {
 
 // adds a transaction to the TransactionTable ... 
 export function addTransaction(type: number) {
-    let putOption = function (sel: HTMLSelectElement, nm: string) {
+    const sel = document.createElement('select');
+
+    const putOption = function (sel: HTMLSelectElement, nm: string) {
         let theOpt = document.createElement("option");
         theOpt.text = nm;
         sel.add(theOpt);
     }
 
-    let putInput = function (el: HTMLTableDataCellElement) {
+    const putInput = function (el: HTMLTableDataCellElement) {
         let ip = document.createElement('input');
         ip.type = 'number';
-        ip.size = 10;
-        ip.addEventListener('change',
-            function (this: HTMLElement, c: Event) { reCalc(); return undefined; });
+        ip.addEventListener('change', evt => { 
+            if(sel.selectedIndex == 0) evt.stopPropagation();
+        })
         el.appendChild(ip);
     }
 
@@ -43,9 +45,6 @@ export function addTransaction(type: number) {
     let cell2 = row.insertCell();
     let cell3 = row.insertCell();
 
-    let sel = document.createElement('select');
-    sel.addEventListener('change',
-        function (this: HTMLElement, c: Event) { reCalc(); return undefined; });
     putOption(sel, "None");
     putOption(sel, "Entry");
     putOption(sel, "Stop");
@@ -86,6 +85,7 @@ function collectData(tl: rc.Trade) {
 
 // recalculate the derived data...
 export function reCalc() {
+    console.log('RECALC!')
     let tdir = parseInt((document.getElementById('tradeDir') as HTMLSelectElement).value, 10);
     let tinst = new rc.Instrument(
         parseFloat((document.getElementById('tickSize') as HTMLInputElement).value),
